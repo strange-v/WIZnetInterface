@@ -233,6 +233,9 @@ int WIZnet_Chip::wait_readable(int socket, int wait_time_ms, int req_size)
         
         if ((size1 > req_size) || (wait_time_ms != (-1) && t.read_ms() > wait_time_ms)) 
         {
+            if (size1 == 0)
+                return NSAPI_ERROR_WOULD_BLOCK;
+
             return size1;
         }
     }

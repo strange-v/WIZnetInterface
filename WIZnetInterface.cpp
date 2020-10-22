@@ -545,7 +545,6 @@ nsapi_size_or_error_t WIZnetInterface::socket_recv(nsapi_socket_t handle, void *
         _mutex.unlock();
         return NSAPI_ERROR_NO_CONNECTION;
     }
-
     DBG("fd: connected is %d\n", SKT(handle)->connected);
 
      while(1) {
@@ -553,7 +552,7 @@ nsapi_size_or_error_t WIZnetInterface::socket_recv(nsapi_socket_t handle, void *
         DBG("fd: _size %d recved_size %d\n", _size, recved_size);
 
         if (_size <= 0) {
-            if(recved_size >= 0){
+            if(recved_size > 0){
                 retsize = recved_size;
                 //INFO("recved_size : %d\n",recved_size);
                 break;
